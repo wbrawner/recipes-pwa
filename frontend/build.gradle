@@ -1,0 +1,21 @@
+plugins {
+    id "com.github.node-gradle.node" version "3.5.0"
+}
+
+repositories {
+    mavenCentral()
+}
+
+task build(type: NpmTask) {
+    args = ['run', 'build']
+    inputs.files(fileTree('node_modules'))
+    inputs.files(fileTree('public'))
+    inputs.files(fileTree('src'))
+    inputs.file('package.json')
+    inputs.file('vite.config.ts')
+    outputs.dir('dist')
+    dependsOn npm_install
+    args = ['run', 'build']
+}
+
+// build.dependsOn(npmBuild)
